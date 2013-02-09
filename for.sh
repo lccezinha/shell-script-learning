@@ -13,7 +13,7 @@ criar_dir()
   then
     mkdir $diretorio_backup
   else
-    echo "Nome já existe informe outro"
+    echo "Nome $diretorio_backup já existe informe outro"
     criar_dir;
   fi 
   clear
@@ -22,13 +22,15 @@ criar_dir()
 #copia os arquivos
 copiar()
 {
+  echo "copiando arquivos para de `pwd` para $diretorio_backup"
+  sleep 3
   for x in *
     do
       cp $x $diretorio_backup
     done
   echo "Copias criadas..."
+  echo "Arquivo copiados para $diretorio_backup : "
   ls $diretorio_backup
-
 }
 
 echo "###################"
@@ -51,6 +53,8 @@ then
   copiar;
 else
   echo "Saindo..."
+  sleep 2
+  clear 
   exit
 fi
 
