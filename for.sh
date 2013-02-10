@@ -9,8 +9,7 @@ criar_dir()
   echo "Nome de diretório de backup : "
   read diretorio_backup
   #se não existir o nome...
-  if [ ! -e $diretorio_backup ];
-  then
+  if [ ! -e $diretorio_backup ]; then
     mkdir $diretorio_backup
   else
     echo "Nome $diretorio_backup já existe informe outro"
@@ -24,26 +23,29 @@ copiar()
 {
   echo "copiando arquivos para de `pwd` para $diretorio_backup"
   sleep 3
-  for x in *
-    do
-      cp $x $diretorio_backup
-    done
+  for x in * do
+    cp $x $diretorio_backup
+  done
   echo "Copias criadas..."
-  echo "Arquivo copiados para $diretorio_backup : "
-  ls $diretorio_backup
+  #se estiver vazio é pq deu erro ER se não é pq copiou
+  if [ -z $diretorio_backup ]; then
+    echo "Ocorreu algum erro, arquivos não copiados."
+  else
+    echo "Arquivo copiados para $diretorio_backup : "
+    ls $diretorio_backup  
+  fi
 }
 
 echo "###################"
 #ou um simple ls .
 #listando arquivos do diretório atual
-for x in *
-  do
-    echo $x
-  done
+for x in * do
+  echo $x
+done
 echo "###################"
 
 
-echo "Deseja copiar os arquivos ?"
+echo "Deseja copiar os arquivos ? [sim, não]"
 read resposta
 clear
 #se falar que sim cria o backup
